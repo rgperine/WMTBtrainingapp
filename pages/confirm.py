@@ -3,7 +3,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import sqlite3
-
+from dotenv import load_dotenv
+import os
 conn = sqlite3.connect('radio.db')
 cursor = conn.cursor()
 
@@ -27,10 +28,11 @@ st.subheader("confirmation")
 st.divider()
 st.write("you selected a training session on "+st.session_state.selectdate+ " at "+st.session_state.selecttime+" with "+ st.session_state.managername)
 # Email credentials
+load_dotenv()
 mailServer = "smtp.mailersend.net"
 port = 587
-email = "MS_QxqMXV@test-yxj6lj9xqr74do2r.mlsender.net"
-password = "mssp.aOEEHEC.pxkjn41pmr04z781.tf9zWKw"  
+email = os.getenv('email')
+password = os.getenv('password')  
 
 
 msg = MIMEMultipart()
